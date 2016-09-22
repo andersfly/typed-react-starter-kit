@@ -1,5 +1,5 @@
 {
-  "name": "typed-react-kit",
+  "name": "typed-react-starter-kit",
   "globalDependencies": {
     "node": "registry:env/node#6.0.0+20160918225031"
   },
