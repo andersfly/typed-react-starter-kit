@@ -1,0 +1,20 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "noImplicitAny": false, // Does not currently work with JSX
+    "removeComments": true,
+    "noLib": false,
+    "jsx": "preserve"
+  },
+  "filesGlob": [
+    "./src/**/*.ts",
+    "./typescript/**/*.ts",
+    "./typescript/**/*.tsx",
+    "./typings/**/*.d.ts"
+  ]
+}
