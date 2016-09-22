@@ -61,7 +61,7 @@ const common = {
   plugins: [
     new ExtractTextPlugin('css/[name].css'),
     new HtmlWebpackPlugin({
-      title: 'Typescript React Redux Seed',
+      title: 'Typed React Starter Kit',
       template: 'src/index.ejs',
       inject: 'body'
     }),

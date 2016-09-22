@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "declaration": false,
-    "noImplicitAny": false, // Does not currently work with JSX
+    "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
     "jsx": "preserve"

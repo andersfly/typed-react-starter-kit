@@ -10,7 +10,7 @@
     "stats": "webpack --profile --json > ./artifacts/build_stats.json"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.12.0",
