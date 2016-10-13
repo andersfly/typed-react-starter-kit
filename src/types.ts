@@ -5,14 +5,14 @@ export type Dictionary<T> = {
   [key: string]: T
 }
 
-export type GenericAction<T,P> = {
+export type Action<T,P> = {
   type: T,
-  payload?: P | Error,
+  payload: P,
   error?: boolean
 }
 
 export type Domain = {
-  saga: (store: Store<any>) => IterableIterator<any>,
-  reducer: (state: Object, action: GenericAction<any, any>) => Object,
+  saga?: (store: Store<any>) => IterableIterator<any>,
+  reducer?: (state: Object, action: Action<any, any>) => Object,
   getRoutes: (store: Object) => React.ReactElement<any>
 }

@@ -12,6 +12,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@types/classnames": "0.0.31",
+    "@types/react": "^0.14.36",
+    "@types/react-dom": "^0.14.17",
+    "@types/react-redux": "^4.4.32",
+    "@types/react-router": "^2.0.36",
+    "@types/whatwg-fetch": "0.0.31",
     "classnames": "^2.2.5",
     "lodash": "^4.12.0",
     "moment": "^2.14.1",
@@ -22,7 +28,7 @@
     "redux": "^3.3.1",
     "redux-saga": "^0.10.4",
     "reselect": "^2.5.1",
-    "typescript": "^1.8.10"
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.7.4",
@@ -45,8 +51,8 @@
     "less-loader": "^2.2.3",
     "react-router-redux": "^4.0.1",
     "style-loader": "^0.13.1",
-    "ts-loader": "^0.8.2",
-    "typescript": "^1.8.10",
+    "ts-loader": "^0.9.1",
+    "typescript": "^2.0.3",
     "webpack": "^1.12.14",
     "webpack-combine-loaders": "^2.0.0",
     "webpack-dev-server": "^1.14.1",

@@ -1,4 +1,4 @@
-import {Action} from './actions';
+import {StoriesAction} from './actions';
 import {Story} from './types';
 
 const dummyStories = new Map<number, Story>(
@@ -10,27 +10,38 @@ const dummyStories = new Map<number, Story>(
 
 export type StoriesState = {
   entities: {
-    stories: Map<string, Story>
-  }
+    stories: Map<number, Story>
+  },
+  detail: number | null
 }
 
 const DEFAULT_STATE = {
   entities: {
     stories: null
-  }
+  },
+  detail: null
 }
 
-export function root(state = DEFAULT_STATE, action: Action<any>) {
+export function root(state = DEFAULT_STATE, action: StoriesAction): StoriesState {
   switch (action.type) {
-    case 'loadStories': {
-      return {
+
+    case 'FETCH_STORIES': {
+      return Object.assign({}, state, {
         entities: Object.assign({},
           state.entities,
           {stories: dummyStories}
         )
-      }
+      })
     }
-  }
 
-  return state
+    case 'SHOW_STORY': {
+      const {slug} = action.payload
+      return Object.assign({}, state, {
+        detail: slug
+      })
+    }
+
+    default:
+      return state
+  }
 }

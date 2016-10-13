@@ -18,7 +18,7 @@ const PATHS = {
 const common = {
   entry: {
     // Seamlessly provide full es2015 env
-    app: ['babel-polyfill', './src/index.ts']
+    app: ['babel-polyfill', 'whatwg-fetch', './src/index.ts']
   },
   devtool: 'source-map',
   debug: true,
