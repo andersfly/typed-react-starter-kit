@@ -1,28 +1,36 @@
 import {call, take, put, race} from 'redux-saga/effects'
 import {Dictionary} from '../types'
-import {StoriesAction} from './actions'
+import {StoriesAction, receiveStories} from './actions'
 
-// const api = new Api('http://example.com/api');
+class Api {
+  static get(url: string, opts: RequestInfo): Promise<any> {
+    return Api.fetch(url, 'GET', opts)
+  }
+
+  private static fetch(url, method, opts) {
+    return window.fetch(url, Object.assign({}, opts, {method}))
+      .then(resp => resp.json())
+  }
+}
 
 type Query = Dictionary<string | number | Array<string>>
 
-function* fetchStories(store) {
-  const actionFilter = action => ['FILTER_BY_TAGS', 'FILTER_BY_SEASON'].includes(action.type);
+function* fetchStories(store): any {
+  const actionFilter = action => ['FETCH_STORIES'].includes(action.type);
 
   while (true) {
     const action: StoriesAction = yield take(actionFilter)
     let query: Query = {};
 
-    if (action.type === 'FILTER_BY_TAGS') {
-      query['tag'] = action.payload.tags
+    switch (action.type) {
+      case 'FETCH_STORIES': {
+        const stories = yield call(Api.get, '/api/stories.json')
+        store.dispatch(receiveStories(stories))
+      }
     }
-    if (action.type === 'FILTER_BY_SEASON') {
-      query['season'] = action.payload.season
-    }
-
-    // Fetch stories from API
-    // api.get('/stories', {})
   }
 }
 
-export function* root({getState}) {}
+export function* root(store) {
+  yield fetchStories(store)
+}

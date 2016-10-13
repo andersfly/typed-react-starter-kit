@@ -1,22 +1,24 @@
 import React from 'react'
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Story} from './types'
-import {loadStory} from './actions'
+import actions from './actions'
 import {StoriesState} from './reducers'
 
 interface StoryListProps {
-  stories: Map<number, Story>
+  stories: Map<string, Story>
+  onItemClick: (slug: string) => void
 }
 
 class StoryList extends React.Component<StoryListProps, {}> {
   render() {
-    const {stories} = this.props;
+    const {stories, onItemClick} = this.props;
 
     return (
       <ul>
-        {Array.from(stories).map(([id, story]) => (
-          <li key={id}>
-            {story.title}
+        {Array.from(stories).map(([slug, story]) => (
+          <li key={slug}>
+            <a href="javascript:;" onClick={() => onItemClick(slug)}>{story.title}</a>
           </li>
         ))}
       </ul>
@@ -24,15 +26,24 @@ class StoryList extends React.Component<StoryListProps, {}> {
   }
 }
 
-const _Stories = (props: StoriesState & {actions: {[key: string]: any}}) => {
-  const {stories} = props.entities;
-  const {loadStory} = props.actions;
+const StoryDetail = ({story, onClose = () => {}}) => {
+  return (
+    <article>
+      <span onClick={() => onClose()}>×</span>
+      <h3>{story.title}</h3>
+      <p>{story.body}</p>
+    </article>
+  )
+}
 
+const _Stories = ({entities, detail, actions}) => {
   return (
     <div>
       Some nice stories!
-      <StoryList stories={stories} />
-      <button onClick={() => loadStory('some-story')}>Load story</button>
+      <StoryList stories={entities.stories} onItemClick={slug => actions.showStoryDetail(slug)} />
+      {detail && (
+        <StoryDetail story={detail} onClose={() => actions.clearStoryDetail()} />
+      )}
     </div>
   )
 }
@@ -43,9 +54,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    actions: {
-      loadStory: (slug: string) => dispatch(loadStory(slug))
-    }
+    actions: bindActionCreators(actions, dispatch)
   };
 };
 
