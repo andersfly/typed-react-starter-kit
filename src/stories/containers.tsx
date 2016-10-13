@@ -32,7 +32,7 @@ const _Stories = (props: StoriesState & {actions: {[key: string]: any}}) => {
     <div>
       Some nice stories!
       <StoryList stories={stories} />
-      <button onClick={() => loadStory(1)}>Load story</button>
+      <button onClick={() => loadStory('some-story')}>Load story</button>
     </div>
   )
 }
@@ -44,7 +44,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     actions: {
-      loadStory: (id: number) => dispatch(loadStory(id))
+      loadStory: (slug: string) => dispatch(loadStory(slug))
     }
   };
 };
